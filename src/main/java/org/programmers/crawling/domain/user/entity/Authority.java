@@ -1,4 +1,4 @@
-package org.programmers.crawling.domain.job.entity;
+package org.programmers.crawling.domain.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,9 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,19 +17,16 @@ import org.programmers.crawling.domain.basetime.entity.BaseTimeEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class Job extends BaseTimeEntity {
+public class Authority extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Job parentJob;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @OneToMany(mappedBy = "parentJob", fetch = FetchType.LAZY)
-    private List<Job> children = new ArrayList<>();
+    @Column(nullable = false)
+    private String authority;
 }
