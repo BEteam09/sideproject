@@ -20,8 +20,6 @@ public class Education extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO: 모두 not null로 설정함. (자소설닷컴 기준, 모든 필드가 필수값임)
-
     @Column(nullable = false)
     private String education;
 

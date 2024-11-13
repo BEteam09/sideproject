@@ -36,15 +36,12 @@ public class JobPosing extends BaseTimeEntity {
 
     private String description;
 
-    // TODO: BIGINT + nullable로 되어있어서 Long 타입으로 지정했음.
     private Long salary;
 
-    // TODO: ENUM으로 지정
     @Column
     @Enumerated(EnumType.STRING)
     private JobType jobType;
 
-    // TODO: 경력인데,, BIGINT로 되어있어서, Long 타입으로 지정했음. n년차를 저장하는 필드인지? 궁금
     private Long experienceLevel;
 
     @Column(nullable = false)

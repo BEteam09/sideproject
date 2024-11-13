@@ -27,7 +27,6 @@ public class Company extends BaseTimeEntity {
     @Column(nullable = false, unique = true)
     private String homepageUrl;
 
-    // TODO: 요거는 종류가 되게 많을 것이라 생각해서, ENUM으로 지정하지 않고, String으로 지정했습니다.
     private String industry;
 
     private Integer companySize;
