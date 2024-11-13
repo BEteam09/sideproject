@@ -14,8 +14,10 @@ test: 테스트 코드, 리팩토링 코드 추가
 
 chore: 빌드 업무 수정, 패키지 매니저 수정, production code와 무관한 부분 (.gitinnore, build.gradle 같은)
 
-comment: 주석 추가 및 변경  
-remove: 파일, 폴더 삭제  
-rename: 파일, 폴더명 수정  
+comment: 주석 추가 및 변경
+
+remove: 파일, 폴더 삭제
+
+rename: 파일, 폴더명 수정
 
 일단 이것만 적고 나중에 표로 다시 정리 해보겠습니다
