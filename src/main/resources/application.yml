@@ -26,3 +26,10 @@ spring:
       hibernate:
         format_sql: true # SQL 이쁘게 보기
         show_sql: true # SQL 보기
+
+
+google:
+  client:
+    username: ${GOOGLE_CLIENT_USERNAME}
+    password: ${GOOGLE_CLIENT_PASSWORD}
+    redirect-url: ${GOOGLE_CLIENT_REDIRECT_URL}
