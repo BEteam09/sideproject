@@ -1,6 +1,8 @@
 package org.programmers.crawling.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.programmers.crawling.domain.user.service.OAuthService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,16 +14,16 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/users/oauth2")
 @Slf4j
+@RequiredArgsConstructor
 public class OAuthController {
 
     @Value("${google.client.username}")
     private String googleClientUsername;
 
-    @Value("${google.client.password}")
-    private String googleClientPassword;
-
     @Value("${GOOGLE_CLIENT_REDIRECT_URL}")
     private String googleClientRedirectURL;
+
+    private final OAuthService oAuthService;
 
     /**
      * 로그인 페이지 호출
@@ -46,10 +48,12 @@ public class OAuthController {
      * 구글 로그인 콜백 처리
      */
     @GetMapping("/google")
-    public ResponseEntity<String> handleGoogleCallback(@RequestParam(name = "code") String authCode) {
+    public ResponseEntity<String> handleGoogleCallback(@RequestParam("code") String authCode) {
         if (authCode != null) {
 //            log.info("Google authCode: {}", authCode);
             // TODO: 인가 코드를 사용하여 액세스 토큰 요청
+
+            oAuthService.getGoogleAccessTokenFromCode(authCode);
             return ResponseEntity.ok("Login successful!");
         }
         return ResponseEntity.badRequest().body("Failed to retrieve auth code.");

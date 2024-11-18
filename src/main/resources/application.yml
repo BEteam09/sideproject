@@ -33,3 +33,6 @@ google:
     username: ${GOOGLE_CLIENT_USERNAME}
     password: ${GOOGLE_CLIENT_PASSWORD}
     redirect-url: ${GOOGLE_CLIENT_REDIRECT_URL}
+  oauth:
+    api:
+      url: ${GOOGLE_OAUTH_API_URL}
