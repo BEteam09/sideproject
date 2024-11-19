@@ -226,6 +226,7 @@ public class CrawlingServiceImpl implements CrawlingService {
           driver.close();
           driver.switchTo().window(tabs.get(0)); // 원래 탭으로 돌아가기
         } catch (Exception e) {
+          // TODO : 에러 처리 개선
           errCnt++;
           log.error("요소 수집 에러 {}", e.getMessage());
         }
