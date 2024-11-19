@@ -7,8 +7,8 @@ import org.programmers.crawling.domain.basetime.entity.BaseTimeEntity;
 import org.programmers.crawling.domain.company.entity.Company;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
 @Builder

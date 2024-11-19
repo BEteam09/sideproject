@@ -9,8 +9,8 @@ import org.programmers.crawling.domain.basetime.entity.BaseTimeEntity;
 import org.programmers.crawling.domain.post.entity.JobPosting;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Builder
 @ToString
