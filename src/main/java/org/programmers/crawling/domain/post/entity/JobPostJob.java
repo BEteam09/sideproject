@@ -29,5 +29,5 @@ public class JobPostJob extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_posting_id")
-    private JobPosing jobPosing;
+    private JobPosting jobPosing;
 }
