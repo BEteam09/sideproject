@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CrawlingController {
 
-  private final CrawlingService crawlingService;
+    private final CrawlingService crawlingService;
 
-  @GetMapping()
-  public String crawl() {
-    crawlingService.crawlAndSaveJobPostings();
-    return "crawling";
-  }
+    @GetMapping()
+    public String crawl() {
+        crawlingService.crawlAndSaveJobPostings();
+        return "crawling";
+    }
 }

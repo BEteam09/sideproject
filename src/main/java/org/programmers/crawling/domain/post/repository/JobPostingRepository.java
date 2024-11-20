@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface JobPostingRepository extends JpaRepository<JobPosting, Long> {
+
     Collection<JobPosting> findAllByTitleIn(List<String> batch);
 }

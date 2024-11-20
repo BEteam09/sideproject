@@ -1,7 +1,6 @@
 package org.programmers.crawling.domain.company.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -22,17 +21,6 @@ public class CompanyServiceImpl implements CompanyService {
 
   @Value("${batch-size}")
   private int batchSize;
-
-  @Override
-  public List<Company> findAndSaveCompany() {
-
-    return List.of();
-  }
-
-  @Override
-  public Optional<Company> findByHomepageUrl(String companyUrl) {
-    return companyRepository.findByHomepageUrl(companyUrl);
-  }
 
   @Override
   @Transactional(propagation = Propagation.REQUIRES_NEW)

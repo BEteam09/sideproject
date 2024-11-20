@@ -16,7 +16,8 @@ import org.programmers.crawling.domain.company.entity.Company;
 public class JobPosting extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_posting_seq") // Bulk Insert 를 위해 Seq 생성
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_posting_seq")
+    // Bulk Insert 를 위해 Seq 생성
     @SequenceGenerator(name = "job_posting_seq", sequenceName = "job_posting_sequence", allocationSize = 50)
     private Long id;
 
