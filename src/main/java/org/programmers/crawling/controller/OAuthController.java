@@ -2,9 +2,9 @@ package org.programmers.crawling.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.programmers.crawling.domain.user.oauth.GoogleClient;
 import org.programmers.crawling.domain.user.oauth.dto.GoogleResourceResponse;
 import org.programmers.crawling.domain.user.service.OAuthService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequiredArgsConstructor
 public class OAuthController {
 
-    @Value("${google.client.username}")
-    private String googleClientUsername;
-
-    @Value("${GOOGLE_CLIENT_REDIRECT_URL}")
-    private String googleClientRedirectURL;
-
+    private final GoogleClient googleClient;
     private final OAuthService oAuthService;
 
     /**
@@ -39,9 +34,7 @@ public class OAuthController {
      */
     @GetMapping("/google/login")
     public RedirectView loginGoogle() {
-        String googleLoginUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientUsername
-            + "&redirect_uri=" + googleClientRedirectURL
-            + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
+        String googleLoginUrl = googleClient.getGoogleLoginUrl();
         return new RedirectView(googleLoginUrl);
     }
 
@@ -51,8 +44,7 @@ public class OAuthController {
     @GetMapping("/google")
     public ResponseEntity<String> handleGoogleCallback(@RequestParam("code") String authCode) {
         if (authCode != null) {
-//            log.info("Google authCode: {}", authCode);
-            String idToken = oAuthService.getGoogleAccessTokenFromCode(authCode);
+            String idToken = oAuthService.getIdTokenFromAuthCode(authCode);
             GoogleResourceResponse profile = oAuthService.getProfileFromIdToken(idToken);
 
             // TODO: ADD System Login Logic
