@@ -1,6 +1,8 @@
 server:
   port: 8080
 
+batch-size: 50 # Bulk Insert Size
+
 spring:
   application:
     name: crawling
@@ -24,5 +26,15 @@ spring:
         # 자바에서 카멜로 필드 작성하면 DB에 스네이크로 기록
     properties:
       hibernate:
-        format_sql: true # SQL 이쁘게 보기
-        show_sql: true # SQL 보기
+#        format_sql: true # SQL 이쁘게 보기
+#        show_sql: true # SQL 보기
+        default_batch_fetch_size: ${batch-size}
+        order_updates: true
+        order_inserts: true
+        generate_statistics: false
+        jdbc:
+          batch_size: ${batch-size}
+    open-in-view: false
+logging:
+  level:
+    org.mariadb.jdbc: info
