@@ -26,6 +26,8 @@ spring:
         # 자바에서 카멜로 필드 작성하면 DB에 스네이크로 기록
     properties:
       hibernate:
+        format_sql: true # SQL 이쁘게 보기
+        show_sql: true # SQL 보기
 #        format_sql: true # SQL 이쁘게 보기
 #        show_sql: true # SQL 보기
         default_batch_fetch_size: ${batch-size}
@@ -38,3 +40,15 @@ spring:
 logging:
   level:
     org.mariadb.jdbc: info
+
+google:
+  client:
+    username: ${GOOGLE_CLIENT_USERNAME}
+    password: ${GOOGLE_CLIENT_PASSWORD}
+    redirect-url: ${GOOGLE_CLIENT_REDIRECT_URL}
+  oauth:
+    api:
+      url: ${GOOGLE_OAUTH_API_URL}
+  resource:
+    api:
+      url: ${GOOGLE_RESOURCE_API_URL}
