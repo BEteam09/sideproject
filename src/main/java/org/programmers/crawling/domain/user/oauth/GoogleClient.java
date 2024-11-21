@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import org.programmers.crawling.domain.user.oauth.dto.GoogleAccessTokenRequest;
 import org.programmers.crawling.domain.user.oauth.dto.GoogleAccessTokenResponse;
+import org.programmers.crawling.domain.user.oauth.dto.GoogleResourceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -29,6 +30,9 @@ public class GoogleClient {
 
     @Value("${google.oauth.api.url}")
     private String googleOauthApiUrl;
+
+    @Value("${google.resource.api.url}")
+    private String googleResourceApiUrl;
 
     private final RestTemplate restTemplate;
 
@@ -71,6 +75,28 @@ public class GoogleClient {
 
         return restTemplate.exchange(
             googleOauthApiUrl, HttpMethod.POST, httpEntity, GoogleAccessTokenResponse.class
+        ).getBody();
+    }
+
+    public GoogleResourceResponse getProfileFromIdToken(String idToken) {
+        HttpEntity<?> httpEntity = createHttpEntityForRequestGoogleResource(idToken);
+
+        GoogleResourceResponse response = requestGoogleResourceServer(httpEntity);
+        System.out.println(response);
+
+        return Optional.ofNullable(response)
+            .orElseThrow(() -> new RuntimeException("Google Resource 서버 통신 에러"));
+    }
+
+    private HttpEntity<?> createHttpEntityForRequestGoogleResource(String idToken) {
+        final HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + idToken);
+        return new HttpEntity<>(headers);
+    }
+
+    private GoogleResourceResponse requestGoogleResourceServer(HttpEntity<?> httpEntity) {
+        return restTemplate.exchange(
+            googleResourceApiUrl, HttpMethod.GET, httpEntity, GoogleResourceResponse.class
         ).getBody();
     }
 }

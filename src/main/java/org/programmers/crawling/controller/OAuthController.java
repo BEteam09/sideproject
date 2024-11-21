@@ -2,6 +2,7 @@ package org.programmers.crawling.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.programmers.crawling.domain.user.oauth.dto.GoogleResourceResponse;
 import org.programmers.crawling.domain.user.service.OAuthService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +52,11 @@ public class OAuthController {
     public ResponseEntity<String> handleGoogleCallback(@RequestParam("code") String authCode) {
         if (authCode != null) {
 //            log.info("Google authCode: {}", authCode);
-            // TODO: 인가 코드를 사용하여 액세스 토큰 요청
+            String idToken = oAuthService.getGoogleAccessTokenFromCode(authCode);
+            GoogleResourceResponse profile = oAuthService.getProfileFromIdToken(idToken);
 
-            oAuthService.getGoogleAccessTokenFromCode(authCode);
+            // TODO: ADD System Login Logic
+
             return ResponseEntity.ok("Login successful!");
         }
         return ResponseEntity.badRequest().body("Failed to retrieve auth code.");

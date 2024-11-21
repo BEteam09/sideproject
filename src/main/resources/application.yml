@@ -36,3 +36,6 @@ google:
   oauth:
     api:
       url: ${GOOGLE_OAUTH_API_URL}
+  resource:
+    api:
+      url: ${GOOGLE_RESOURCE_API_URL}
