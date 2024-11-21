@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.programmers.crawling.domain.basetime.entity.BaseTimeEntity;
-import org.programmers.crawling.domain.post.entity.JobPosing;
+import org.programmers.crawling.domain.post.entity.JobPosting;
 import org.programmers.crawling.domain.user.entity.User;
 
 @Entity
@@ -32,7 +32,7 @@ public class Application extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_posting_id")
-    private JobPosing jobPosing;
+    private JobPosting jobPosing;
 
     @Column(nullable = false)
     private String status;
